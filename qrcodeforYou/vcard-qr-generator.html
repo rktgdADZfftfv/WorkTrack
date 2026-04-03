@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>vCard QR Generator | qrcodeforYou</title>
+    <link rel="icon" type="image/png" href="webicon.png">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <h1>vCard QR Generator</h1>
+
+    <input id="name" placeholder="Name">
+
+    <input id="phone" placeholder="Phone">
+
+    <input id="email" placeholder="Email">
+
+    <button onclick="generate()">Generate QR</button>
+
+    <br><br>
+
+    <img id="qr">
+    <section class="seo-content">
+
+        <h2>About This QR Code Tool</h2>
+
+        <p>
+            qrcodeforYou is a free online QR code generator that allows you to create different types of QR codes
+            instantly.
+            You can generate QR codes for websites, WiFi passwords, contact details, emails, SMS messages and more.
+        </p>
+
+        <h2>How QR Codes Work</h2>
+
+        <p>
+            A QR code is a type of two-dimensional barcode that can store information such as links, text, contact
+            information
+            or WiFi credentials. When scanned using a smartphone camera or QR scanner app, the encoded data opens
+            instantly.
+        </p>
+
+        <h2>Why Use Our QR Code Generator</h2>
+
+        <ul>
+
+            <li>Free and instant QR code creation</li>
+
+            <li>No signup required</li>
+
+            <li>Works on mobile and desktop</li>
+
+            <li>Multiple QR code formats supported</li>
+
+            <li>Fast and secure generation</li>
+
+        </ul>
+
+    </section>
+        <section class="seo-content">
+            <h2>FAQ</h2>
+        
+            <h3>Is this QR generator free?</h3>
+            <p>Yes, QRcodeforYou is completely free to use.</p>
+        
+            <h3>Can I generate QR codes for websites?</h3>
+            <p>Yes, you can create QR codes for URLs, WiFi and more.</p>
+        </section>
+
+
+    <script>
+
+        function generate() {
+
+            let n = document.getElementById("name").value
+            let p = document.getElementById("phone").value
+            let e = document.getElementById("email").value
+
+            let data = `BEGIN:VCARD
+VERSION:3.0
+FN:${n}
+TEL:${p}
+EMAIL:${e}
+END:VCARD`
+
+            document.getElementById("qr").src =
+                "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + encodeURIComponent(data)
+
+        }
+
+    </script>
+
+</body>
+
+</html>

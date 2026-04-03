@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>QR Code With Logo Generator | qrcodeforYou</title>
+    <link rel="icon" type="image/png" href="webicon.png">
+
+    <meta name="description" content="Create QR codes with logo in center. Free QR logo generator online.">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+</head>
+
+<body>
+
+    <h1>QR Code With Logo</h1>
+
+    <input id="text" placeholder="Enter text or URL">
+
+    <br><br>
+
+    <input type="file" id="logo">
+
+    <br><br>
+
+    <button onclick="generateQR()">Generate QR</button>
+
+    <br><br>
+
+    <canvas id="canvas"></canvas>
+    <section class="seo-content">
+    
+        <h2>About This QR Code Tool</h2>
+    
+        <p>
+            qrcodeforYou is a free online QR code generator that allows you to create different types of QR codes instantly.
+            You can generate QR codes for websites, WiFi passwords, contact details, emails, SMS messages and more.
+        </p>
+    
+        <h2>How QR Codes Work</h2>
+    
+        <p>
+            A QR code is a type of two-dimensional barcode that can store information such as links, text, contact
+            information
+            or WiFi credentials. When scanned using a smartphone camera or QR scanner app, the encoded data opens instantly.
+        </p>
+    
+        <h2>Why Use Our QR Code Generator</h2>
+    
+        <ul>
+    
+            <li>Free and instant QR code creation</li>
+    
+            <li>No signup required</li>
+    
+            <li>Works on mobile and desktop</li>
+    
+            <li>Multiple QR code formats supported</li>
+    
+            <li>Fast and secure generation</li>
+    
+        </ul>
+    
+    </section>
+
+        <section class="seo-content">
+            <h2>FAQ</h2>
+        
+            <h3>Is this QR generator free?</h3>
+            <p>Yes, QRcodeforYou is completely free to use.</p>
+        
+            <h3>Can I generate QR codes for websites?</h3>
+            <p>Yes, you can create QR codes for URLs, WiFi and more.</p>
+        </section>
+
+
+    <script>
+
+        function generateQR() {
+
+            let text = document.getElementById("text").value
+            let canvas = document.getElementById("canvas")
+
+            QRCode.toCanvas(canvas, text, function (error) {
+
+                if (error) console.error(error)
+
+                let ctx = canvas.getContext("2d")
+                let logoInput = document.getElementById("logo")
+
+                if (logoInput.files.length > 0) {
+
+                    let img = new Image()
+                    img.src = URL.createObjectURL(logoInput.files[0])
+
+                    img.onload = function () {
+
+                        let size = canvas.width * 0.2
+
+                        ctx.drawImage(img,
+                            (canvas.width - size) / 2,
+                            (canvas.height - size) / 2,
+                            size,
+                            size)
+
+                    }
+
+                }
+
+            })
+
+        }
+
+    </script>
+
+</body>
+
+</html>
