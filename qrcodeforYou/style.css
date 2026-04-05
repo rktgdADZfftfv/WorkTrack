@@ -1,230 +1,40 @@
-body {
-
-    font-family: system-ui;
-    margin: 0;
-    background: linear-gradient(135deg, #141e30, #243b55);
-
-    color: white;
-    text-align: center;
-
+/* --- DARK MODE STYLES --- */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
-header {
-
-    padding: 40px;
-
+body.dark-mode header,
+body.dark-mode .dropdown-menu,
+body.dark-mode .app-container,
+body.dark-mode .seo-section {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-top: 1px solid #333;
 }
 
-.tools {
-
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-
-    gap: 20px;
-    padding: 30px;
-
+body.dark-mode a,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode .logo-section {
+    color: #ffffff;
 }
 
-.card {
-
-    background: rgba(255, 255, 255, 0.15);
-
-    backdrop-filter: blur(10px);
-
-    padding: 30px;
-
-    border-radius: 14px;
-
-    text-decoration: none;
-
-    color: white;
-
-    font-weight: bold;
-
-    transition: 0.3s;
-
+body.dark-mode input,
+body.dark-mode select {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #444;
 }
 
-.card:hover {
-
-    transform: translateY(-6px);
-
-    background: rgba(255, 255, 255, 0.25);
-
+body.dark-mode .tool-card {
+    background-color: #2c2c2c;
+    border: 1px solid #444;
 }
 
-.seo-content {
-
-    max-width: 800px;
-
-    margin: 60px auto;
-
-    padding: 20px;
-
-    background: white;
-
-    color: #333;
-
-    border-radius: 10px;
-
-    line-height: 1.7;
-
-    text-align: left;
-
-}
-
-.seo-content h2 {
-
-    margin-top: 25px;
-
-}
-
-input,
-textarea,
-select {
-
-    width: 100%;
-    max-width: 400px;
-
-    padding: 14px 16px;
-
-    margin: 10px auto;
-
-    display: block;
-
-    font-size: 16px;
-
-    border-radius: 10px;
-
-    border: 1px solid #ddd;
-
-    outline: none;
-
-    transition: 0.25s;
-
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-
-}
-
-/* focus effect */
-
-input:focus,
-textarea:focus,
-select:focus {
-
-    border-color: #6c63ff;
-
-    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
-
-}
-
-input[type="file"] {
-
-    background: white;
-
-    padding: 12px;
-
-    cursor: pointer;
-
-}
-
-button {
-
-    padding: 14px 28px;
-
-    font-size: 16px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    background: linear-gradient(135deg, #6c63ff, #5a54e8);
-
-    color: white;
-
-    cursor: pointer;
-
-    margin-top: 10px;
-
-    transition: 0.25s;
-
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
-
-}
-
-button:hover {
-
-    transform: translateY(-2px);
-
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-
-}
-
-#qr,
-canvas {
-
-    margin-top: 25px;
-
-    background: white;
-
-    padding: 12px;
-
-    border-radius: 12px;
-
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-
-}
-
-.topbar {
-
-    width: 100%;
-
-    padding: 15px 30px;
-
-    display: flex;
-
-    justify-content: center;
-
-    background: white;
-
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
-}
-
-.logo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-}
-
-.logo h1 {
-
-    font-size: 22px;
-
-    color: #6c63ff;
-
-    margin: 0;
-
-}
-
-.qr-icon {
-
-    width: 28px;
-
-    height: 28px;
-
-    background:
-
-        linear-gradient(90deg, #6c63ff 50%, transparent 50%),
-
-        linear-gradient(#6c63ff 50%, transparent 50%);
-
-    background-size: 10px 10px;
-
-    border-radius: 4px;
-
+/* QR Code humesha white background me hi rahne denge taaki scanner scan kar sake */
+body.dark-mode #qrcode-container {
+    background-color: #ffffff;
+    border: 2px solid #3498db;
 }

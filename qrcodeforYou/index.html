@@ -2,125 +2,544 @@
 <html lang="en">
 
 <head>
-
-    <title>Free QR Code Generator | QR-CodeforYou</title>
-    <link rel="icon" type="image/png" href="webicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-        content="Create QR codes for URL, WiFi, Image, File and Contact. Free QR generator online.">
+        content="Free All-in-One QR Code Generator. Create QR codes for Website URLs, Google Search, Wi-Fi, vCard, and Business Logos instantly in real-time.">
+    <meta name="keywords"
+        content="QR code generator, free QR maker, Google search QR, Wi-Fi QR code, Business QR with logo, vCard creator">
+    <title>Free All-in-One QR Code Generator | URL, Wi-Fi, Logo & vCard</title>
 
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/751/751381.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- NAVBAR STYLES --- */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .logo-section img {
+            height: 30px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 10px;
+            display: block;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        /* Hover Dropdown for Tools */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .dropdown-menu li {
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .dropdown-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a {
+            padding: 12px 16px;
+            font-weight: normal;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Show dropdown on hover */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* --- GENERATOR APP STYLES --- */
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            min-height: 60vh;
+        }
+
+        .app-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        #qrcode-container {
+            margin: 20px auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            display: inline-block;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- SEO CONTENT STYLES --- */
+        .seo-section {
+            background-color: #ffffff;
+            padding: 50px 20px;
+            border-top: 1px solid #eaeaea;
+        }
+
+        .seo-container {
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .seo-container h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .seo-container h3 {
+            color: #3498db;
+            margin-top: 25px;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tool-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+        }
+    </style>
 </head>
 
 <body>
-<header class="topbar">
 
-    <div class="logo">
-
-        <div class="qr-icon"></div>
-
-        <h1>QR-CodeforYou</h1>
-
-    </div>
-
-</header>
     <header>
+        <div class="navbar">
+            <a href="#" class="logo-section">
+                <img src="https://cdn-icons-png.flaticon.com/512/751/751381.png" alt="QR Generator Logo">
+                QuickQR
+            </a>
 
-        <h1>QR-Code forYou</h1>
-        <p>Create QR Codes Instantly</p>
-
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li class="dropdown">
+                    <a href="#">Tools ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="selectToolFromNav('url')">URL Link QR</a></li>
+                        <li><a href="#" onclick="selectToolFromNav('google')">Google Search QR</a></li>
+                        <li><a href="#" onclick="selectToolFromNav('wifi')">Wi-Fi Network QR</a></li>
+                        <li><a href="#" onclick="selectToolFromNav('vcard')">vCard Contact QR</a></li>
+                        <li><a href="#" onclick="selectToolFromNav('logo')">Business QR (with Logo)</a></li>
+                    </ul>
+                </li>
+                <li><a href="#about">About</a></li>
+            
+                <li>
+                    <button id="theme-toggle" style="background:none; border:none; font-size:20px; cursor:pointer; padding: 10px;"
+                        title="Toggle Dark Mode">🌙</button>
+                </li>
+            
+        </div>
     </header>
 
-    <section class="tools">
+    <div class="main-content">
+        <div class="app-container">
+            <h1>Create Your QR Code</h1>
 
-        <a href="url-qr-generator.html" class="card">
-            URL QR
-        </a>
+            <div class="form-group">
+                <label for="qr-type">Select Tools Type:</label>
+                <select id="qr-type">
+                    <option value="url">Website URL</option>
+                    <option value="text">Plain Text</option>
+                    <option value="google">Google Search Query</option>
+                    <option value="email">Email Address</option>
+                    <option value="phone">Phone Number</option>
+                    <option value="wifi">Wi-Fi Network</option>
+                    <option value="vcard">Contact Card (vCard)</option>
+                    <option value="logo">Company QR (with Logo)</option>
+                </select>
+            </div>
 
-        <a href="wifi-qr-generator.html" class="card">
-            WiFi QR
-        </a>
+            <div class="form-group" id="input-group-data">
+                <label id="input-label" for="qr-data">Enter URL:</label>
+                <input type="text" id="qr-data" placeholder="https://example.com" autocomplete="off">
+            </div>
 
-        <a href="contact-qr-generator.html" class="card">
-            Contact QR
-        </a>
+            <div class="form-group hidden" id="wifi-fields">
+                <label>Network Name (SSID):</label>
+                <input type="text" id="wifi-ssid" placeholder="My Network" class="wifi-input">
+                <label style="margin-top: 10px;">Password:</label>
+                <input type="password" id="wifi-pass" placeholder="Password" class="wifi-input">
+            </div>
 
-        <a href="image-qr-generator.html" class="card">
-            Image QR
-        </a>
+            <div class="form-group hidden" id="vcard-fields">
+                <label>Full Name:</label>
+                <input type="text" id="vcard-name" placeholder="John Doe" class="vcard-input">
+                <label style="margin-top: 10px;">Organization:</label>
+                <input type="text" id="vcard-org" placeholder="Acme Inc." class="vcard-input">
+                <label style="margin-top: 10px;">Phone:</label>
+                <input type="tel" id="vcard-tel" placeholder="+1 123 456 7890" class="vcard-input">
+                <label style="margin-top: 10px;">Email:</label>
+                <input type="email" id="vcard-email" placeholder="john@example.com" class="vcard-input">
+            </div>
 
-        <a href="file-qr-generator.html" class="card">
-            File QR
-        </a>
+            <div class="form-group hidden" id="logo-fields">
+                <label>Company/Website Data:</label>
+                <input type="text" id="logo-data" placeholder="https://yourcompany.com" class="logo-input">
+                <label style="margin-top: 10px;">Company Logo (PNG/JPG):</label>
+                <input type="file" id="logo-file" accept="image/*" class="logo-input">
+            </div>
 
-        <a href="qr-scanner.html" class="card">
-            QR Scanner
-        </a>
+            <div id="qrcode-container"></div>
+            <button id="download-btn" disabled>Download Free QR Code</button>
+        </div>
+    </div>
 
-        <a href="email-qr-generator.html" class="card">
-            Email QR
-        </a>
+    <section class="seo-section" id="about">
+        <div class="seo-container">
+            <h2>What is a QR Code?</h2>
+            <p>A QR code (Quick Response code) is a two-dimensional barcode that can store various types of information,
+                such as website URLs, plain text, email addresses, and phone numbers. Unlike traditional barcodes, QR
+                codes can be easily scanned using modern smartphone cameras, instantly connecting the physical world to
+                digital content.</p>
 
-        <a href="sms-qr-generator.html" class="card">
-            SMS QR
-        </a>
+            <h2>Why Use Our Free QR Code Generator?</h2>
+            <p>Our tool is built for speed and privacy. The generation happens in <strong>real-time</strong> directly in
+                your browser. This means your private data (like Wi-Fi passwords or vCard contact details) is never sent
+                to our servers. It is 100% free, fast, and secure.</p>
 
-        <a href="vcard-qr-generator.html" class="card">
-            vCard QR
-        </a>
-        
-        <a href="qr-logo-generator.html" class="card">
-            Logo QR
-        </a>
-
+            <h2>Explore Our QR Code Tools</h2>
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <h3>🌐 Website URL QR</h3>
+                    <p>Convert any link into a scannable QR code. Perfect for menus, promotional flyers, and social
+                        media links.</p>
+                </div>
+                <div class="tool-card">
+                    <h3>🔍 Google Search QR</h3>
+                    <p>Create a code that instantly runs a specific Google Search query on the user's phone. Great for
+                        local SEO campaigns.</p>
+                </div>
+                <div class="tool-card">
+                    <h3>📶 Wi-Fi QR Code</h3>
+                    <p>Allow your guests or customers to instantly connect to your Wi-Fi network without typing complex
+                        passwords.</p>
+                </div>
+                <div class="tool-card">
+                    <h3>💼 Business Logo QR</h3>
+                    <p>Brand your QR codes! Add your company logo to the center of the QR code to build trust and brand
+                        recognition.</p>
+                </div>
+                <div class="tool-card">
+                    <h3>📇 vCard (Contact) QR</h3>
+                    <p>Modernize your business cards. A vCard QR allows people to save your name, email, and phone
+                        number straight to their contacts.</p>
+                </div>
+            </div>
+        </div>
     </section>
-<section class="seo-content">
 
-    <h2>About This QR Code Tool</h2>
+    <script>
+        // General UI Elements
+        const qrTypeSelect = document.getElementById('qr-type');
+        const qrContainer = document.getElementById('qrcode-container');
+        const downloadBtn = document.getElementById('download-btn');
+        const groupData = document.getElementById('input-group-data');
+        const dataInput = document.getElementById('qr-data');
+        const inputLabel = document.getElementById('input-label');
 
-    <p>
-        qrcodeforYou is a free online QR code generator that allows you to create different types of QR codes instantly.
-        You can generate QR codes for websites, WiFi passwords, contact details, emails, SMS messages and more.
-    </p>
+        // Group references
+        const groups = {
+            wifi: document.getElementById('wifi-fields'),
+            vcard: document.getElementById('vcard-fields'),
+            logo: document.getElementById('logo-fields'),
+        };
 
-    <h2>How QR Codes Work</h2>
+        let qrCode = null;
 
-    <p>
-        A QR code is a type of two-dimensional barcode that can store information such as links, text, contact
-        information
-        or WiFi credentials. When scanned using a smartphone camera or QR scanner app, the encoded data opens instantly.
-    </p>
+        // --- NEW: Function to handle Navbar Dropdown clicks ---
+        function selectToolFromNav(type) {
+            qrTypeSelect.value = type;
+            // Manually trigger the change event so the form updates
+            qrTypeSelect.dispatchEvent(new Event('change'));
+            // Scroll slightly down to the generator
+            document.querySelector('.app-container').scrollIntoView({ behavior: 'smooth' });
+        }
 
-    <h2>Why Use Our QR Code Generator</h2>
+        // Handle Type Selection: Show/Hide relevant input forms
+        qrTypeSelect.addEventListener('change', (e) => {
+            clearQR();
+            const selectedType = e.target.value;
 
-    <ul>
+            Object.values(groups).forEach(group => group.classList.add('hidden'));
 
-        <li>Free and instant QR code creation</li>
+            if (selectedType === 'wifi' || selectedType === 'vcard' || selectedType === 'logo') {
+                groupData.classList.add('hidden');
+                groups[selectedType].classList.remove('hidden');
+            } else {
+                groupData.classList.remove('hidden');
+                switch (selectedType) {
+                    case 'url': updateInputGroup('Enter URL:', 'https://example.com'); break;
+                    case 'text': updateInputGroup('Enter Text:', 'Hello World!'); break;
+                    case 'google': updateInputGroup('Enter Google Search Term:', 'e.g. Best pizza'); break;
+                    case 'email': updateInputGroup('Enter Email:', 'name@example.com'); break;
+                    case 'phone': updateInputGroup('Enter Phone Number:', '+1 234...'); break;
+                }
+            }
+        });
 
-        <li>No signup required</li>
+        function updateInputGroup(labelText, placeholderText) {
+            inputLabel.innerText = labelText;
+            dataInput.value = '';
+            dataInput.placeholder = placeholderText;
+            dataInput.focus();
+        }
 
-        <li>Works on mobile and desktop</li>
+        // Event Listeners for real-time generation
+        dataInput.addEventListener('input', generateStandardQR);
+        document.querySelectorAll('.wifi-input').forEach(input => input.addEventListener('input', generateWifiQR));
+        document.querySelectorAll('.vcard-input').forEach(input => input.addEventListener('input', generateVCardQR));
+        document.querySelectorAll('.logo-input').forEach(input => input.addEventListener('input', generateLogoQR));
+        document.getElementById('logo-file').addEventListener('change', generateLogoQR);
 
-        <li>Multiple QR code formats supported</li>
 
-        <li>Fast and secure generation</li>
+        // Generation Functions
+        function generateStandardQR() {
+            let rawData = dataInput.value.trim();
+            let type = qrTypeSelect.value;
+            let finalData = rawData;
+            if (!rawData) { clearQR(); return; }
+            if (type === 'google') finalData = `https://www.google.com/search?q=${encodeURIComponent(rawData)}`;
+            else if (type === 'email') finalData = `mailto:${rawData}`;
+            else if (type === 'phone') finalData = `tel:${rawData}`;
+            renderBaseQR(finalData);
+        }
 
-    </ul>
+        function generateWifiQR() {
+            const ssid = document.getElementById('wifi-ssid').value.trim();
+            const pass = document.getElementById('wifi-pass').value.trim();
+            if (!ssid) { clearQR(); return; }
+            renderBaseQR(`WIFI:T:WPA;S:${ssid};P:${pass};;`);
+        }
 
-</section>
+        function generateVCardQR() {
+            const name = document.getElementById('vcard-name').value.trim();
+            const org = document.getElementById('vcard-org').value.trim();
+            const tel = document.getElementById('vcard-tel').value.trim();
+            const email = document.getElementById('vcard-email').value.trim();
+            if (!name) { clearQR(); return; }
+            renderBaseQR(`BEGIN:VCARD\nVERSION:3.0\nN:${name}\nORG:${org}\nTEL;TYPE=VOICE,CELL,PREF:${tel}\nEMAIL;TYPE=INTERNET:${email}\nEND:VCARD`);
+        }
 
-    <section class="seo-content">
-        <h2>FAQ</h2>
-    
-        <h3>Is this QR generator free?</h3>
-        <p>Yes, QRcodeforYou is completely free to use.</p>
-    
-        <h3>Can I generate QR codes for websites?</h3>
-        <p>Yes, you can create QR codes for URLs, WiFi and more.</p>
-    </section>
+        function generateLogoQR() {
+            const textData = document.getElementById('logo-data').value.trim();
+            const logoFile = document.getElementById('logo-file').files[0];
+            if (!textData) { clearQR(); return; }
+
+            renderBaseQR(textData);
+            if (logoFile) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.onload = function () { addLogoToCanvas(img); }
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(logoFile);
+            }
+        }
+
+        function addLogoToCanvas(logoImg) {
+            const canvas = qrContainer.querySelector('canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const qrcSize = 250;
+            const logoWidth = qrcSize * 0.18;
+            const logoHeight = logoWidth;
+            const x = (qrcSize - logoWidth) / 2;
+            const y = (qrcSize - logoHeight) / 2;
+
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(x - 4, y - 4, logoWidth + 8, logoHeight + 8);
+            ctx.drawImage(logoImg, x, y, logoWidth, logoHeight);
+        }
+
+        function renderBaseQR(dataToEncode) {
+            if (!dataToEncode) { clearQR(); return; }
+            qrContainer.style.visibility = 'visible';
+            qrContainer.style.opacity = '1';
+            if (qrCode === null) {
+                qrCode = new QRCode(qrContainer, {
+                    text: dataToEncode, width: 250, height: 250,
+                    colorDark: "#000000", colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            } else {
+                qrCode.clear();
+                qrCode.makeCode(dataToEncode);
+            }
+            setTimeout(() => { downloadBtn.disabled = false; }, 50);
+        }
+
+        function clearQR() {
+            qrContainer.innerHTML = '';
+            qrContainer.style.visibility = 'hidden';
+            qrContainer.style.opacity = '0';
+            qrCode = null;
+            downloadBtn.disabled = true;
+        }
+
+        downloadBtn.addEventListener('click', () => {
+            const canvas = qrContainer.querySelector('canvas');
+            if (canvas) {
+                const link = document.createElement('a');
+                link.download = 'quickqr-code.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }
+        });
+    </script>
+    <script src="script.js"></script>
 
 </body>
 
