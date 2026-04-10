@@ -1,3 +1,61 @@
+/* --- MOBILE FRIENDLY / RESPONSIVE CSS --- */
+@media screen and (max-width: 768px) {
+
+    /* Navbar ko lamba (vertical) karein taaki link na dab jayein */
+    .navbar {
+        flex-direction: column;
+        padding: 15px 10px;
+    }
+
+    .logo-section {
+        margin-bottom: 15px;
+    }
+
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Tool dropdown ko mobile me theek se dikhane ke liye */
+    .dropdown-menu {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 250px;
+        text-align: center;
+    }
+
+    /* Main box ki padding kam karein taaki mobile me fit aaye */
+    .main-content {
+        padding: 20px 10px;
+    }
+
+    .app-container {
+        padding: 25px 15px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    /* QR Code image screen se bahar na jaye */
+    #qrcode-container canvas,
+    #qrcode-container img {
+        max-width: 100%;
+        height: auto !important;
+        margin: 0 auto;
+    }
+
+    /* Bottom SEO text ki spacing theek karein */
+    .seo-section {
+        padding: 30px 15px;
+    }
+
+    .seo-container h2 {
+        font-size: 20px;
+    }
+}
+
 /* --- DARK MODE STYLES --- */
 body.dark-mode {
     background-color: #121212;
