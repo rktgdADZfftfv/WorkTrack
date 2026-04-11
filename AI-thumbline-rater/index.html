@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Thumbnail & Title Rater | For Creators</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 AI Thumbnail Rater</h1>
+            <p>Upload your thumbnail and video topic. Let AI rate it out of 10!</p>
+        </header>
+
+        <main class="upload-section">
+            <div class="input-group">
+                <label for="thumbnailInput">Upload Thumbnail (JPG/PNG)</label>
+                <input type="file" id="thumbnailInput" accept="image/png, image/jpeg">
+                <img id="previewImage" style="display: none;" alt="Thumbnail Preview">
+            </div>
+
+            <div class="input-group">
+                <label for="topicInput">Video Topic / Idea</label>
+                <input type="text" id="topicInput" placeholder="e.g., How to learn JavaScript in 30 days">
+            </div>
+
+            <button id="analyzeBtn">Analyze with AI ✨</button>
+        </main>
+
+        <div id="resultSection" class="hidden">
+            <h3>🤖 AI Feedback:</h3>
+            <div id="aiScore"></div>
+            <p id="aiFeedbackText">Loading AI insights...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
