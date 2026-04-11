@@ -31,7 +31,7 @@ export default async function handler(req, res) {
                         { text: promptText },
                         {
                             inline_data: {
-                                mime_type: "image/jpeg",
+                                mime_type: "image/jpeg/png",
                                 data: image
                             }
                         }
